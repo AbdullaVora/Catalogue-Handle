@@ -1,0 +1,255 @@
+body{
+    background-color: #212121;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: all 1s ease;
+  }
+  
+  .form .form_front {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    backface-visibility: hidden;
+    padding: 65px 45px;
+    border-radius: 15px;
+    box-shadow: inset 2px 2px 10px rgba(0,0,0,1),
+    inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+  }
+  
+  .form .form_back {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    backface-visibility: hidden;
+    transform: rotateY(-180deg);
+    padding: 65px 45px;
+    border-radius: 15px;
+    box-shadow: inset 2px 2px 10px rgba(0,0,0,1),
+    inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+  }
+  
+  .form_details {
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    color: white;
+  }
+  
+  .input {
+    width: 245px;
+    min-height: 45px;
+    color: #fff;
+    outline: none;
+    transition: 0.35s;
+    padding: 0px 7px;
+    background-color: #212121;
+    border-radius: 6px;
+    border: 2px solid #212121;
+    box-shadow: 6px 6px 10px rgba(0,0,0,1),
+    1px 1px 10px rgba(255, 255, 255, 0.6);
+  }
+  
+  .input::placeholder {
+    color: #999;
+  }
+  
+  .input:focus.input::placeholder {
+    transition: 0.3s;
+    opacity: 0;
+  }
+  
+  .input:focus {
+    transform: scale(1.05);
+    box-shadow: 6px 6px 10px rgba(0,0,0,1),
+    1px 1px 10px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 10px rgba(0,0,0,1),
+    inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+  }
+  
+  .btn {
+    padding: 10px 35px;
+    cursor: pointer;
+    background-color: #212121;
+    border-radius: 6px;
+    border: 2px solid #212121;
+    box-shadow: 6px 6px 10px rgba(0,0,0,1),
+    1px 1px 10px rgba(255, 255, 255, 0.6);
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.35s;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 6px 6px 10px rgba(0,0,0,1),
+    1px 1px 10px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 10px rgba(0,0,0,1),
+    inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+  }
+  
+  .btn:focus {
+    transform: scale(1.05);
+    box-shadow: 6px 6px 10px rgba(0,0,0,1),
+    1px 1px 10px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 10px rgba(0,0,0,1),
+    inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+  }
+  
+  .form .switch {
+    font-size: 13px;
+    color: white;
+  }
+  
+  .form .switch .signup_tog {
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .container #signup_toggle {
+    display: none;
+  }
+  
+  .container #signup_toggle:checked + .form {
+    transform: rotateY(-180deg);
+  }
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+table{
+    padding: 10px;
+    border: 2px solid gray;
+    /* width: 100%;  */
+}
+th{
+    padding: 12px;
+}
+td{
+    text-align: center;
+    overflow: hidden;
+}
+tbody td{
+  font-size: 18px;
+  font-weight: 700;
+}
+thead th{
+  font-size: 18px;
+  font-weight: 700;
+}
+img{
+    width: 150px;
+    height: 150px;
+    margin: 3px;
+    margin-bottom: 0px !important;
+    transform: scale(1.1);
+}
+h3{
+    text-align: center;
+}
+
+input::file-selector-button{
+  background-color: #212121;
+  color: #999;
+  margin: 13px;
+  border-radius: 10px;
+}
+#imageInput{
+  color: #999;
+}
+
+.btn-donate {
+  --clr-font-main: hsla(0 0% 20% / 100);
+  --btn-bg-1: hsla(194 100% 69% / 1);
+  --btn-bg-2: hsla(217 100% 56% / 1);
+  --btn-bg-color: hsla(360 100% 100% / 1);
+  --radii: 0.5em;
+  cursor: pointer;
+  padding: 0.2em 1.4em;
+  min-width: 50px;
+  min-height: 50px;
+  font-size: var(--size, 1rem);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 500;
+  transition: 0.8s;
+  background-size: 280% auto;
+  background-image: linear-gradient(325deg, var(--btn-bg-2) 0%, var(--btn-bg-1) 55%, var(--btn-bg-2) 90%);
+  border: none;
+  border-radius: var(--radii);
+  color: var(--btn-bg-color);
+  box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5), 0px 5px 5px -1px rgba(58, 125, 233, 0.25), inset 4px 4px 8px rgba(175, 230, 255, 0.5), inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+}
+
+.btn-donate:hover {
+  background-position: right top;
+}
+
+.btn-donate:is(:focus, :focus-visible, :active) {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-donate {
+    transition: linear;
+  }
+}
+
+.div{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.div-2{
+  position: absolute;
+  top: 10%;
+  left: 2%;
+}
+.btn-margin{
+  margin: 0px 10px;
+}
+
+td{
+  color: wheat;
+  font-weight: 800;
+  padding: 8px;
+}
+
+th{
+  color: wheat;
+  font-weight: 500;
+}
+
+table{
+  border-color:antiquewhite;
+}

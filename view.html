@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #212121;
+        }
+
+        #clear,
+        #remove {
+            display: inline-block;
+        }
+
+        #remove {
+            padding: 72px 26px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="div-2">
+            <a href="index.html" id="link"><button class="btn-donate btn-margin" id="home">Home</button></a>
+            <button id="pdf" class="btn-donate btn-margin">print</button>
+        </div>
+        <table id="saveas" class="pdfcolor" border="2">
+            <thead id="head">
+                <tr>
+                    <td colspan="9">
+                        <h1>Novetly Apperals</h1>
+                        <h3>187, Novelty Apperals, Sukhadiya Sehri<br>Ruwala Tekra Bhagal, Surat - 395003</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <th id="checkhead"><input type="checkbox" name="check" id="maincheck"
+                            style="width: 20px; height: 20px; cursor: pointer;"></th>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Article No.</th>
+                    <th>Image</th>
+                    <th>Size Group</th>
+                    <th>Qunatity Per Set</th>
+                    <th>Rate Per Price</th>
+                    <th id="clear"><button class="btn-donate" onclick="clearData()"
+                            style="min-width: 30px; min-height: 40px;">Clear</button></th>
+                </tr>
+            </thead>
+            <tbody id="dataShow">
+                <tr>
+                    <td colspan="9">
+                        <h3>summer new style</h3>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Include html2pdf library -->
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+    <script>
+
+        function showData() {
+
+            var showing = document.getElementById('dataShow');
+            showing.innerHTML = '';
+
+            var prints = JSON.parse(localStorage.getItem('storeData'))
+            console.log(prints);
+
+            for (let i = 0; i < prints.length; i++) {
+                showing.innerHTML += `<tr id="rows">
+                    <td id="checkrow"><input type="checkbox" name="check" id="check" style="width: 20px; height: 20px; cursor: pointer;"></td>
+                    <td>${prints[i].id}</td>
+                    <td>${prints[i].name}</td>
+                    <td>${prints[i].product}</td>
+                    <td><img src="${prints[i].image}" alt=""></td>
+                    <td>${prints[i].size}</td>
+                    <td>${prints[i].qty}</td>
+                    <td>${prints[i].price}</td>
+                    <td id="remove"><button class="btn-donate" style="min-width: 30px; min-height: 30px;" onclick="deletedata(${prints[i].id})">X</button></td>
+                    </tr`
+            };
+
+
+        }
+        showData();
+
+        function deletedata(indexid) {
+            var data = JSON.parse(localStorage.getItem('storeData'))
+            const indexfind = data.findIndex(item => item.id == indexid);
+
+            data.splice(indexfind, 1);
+
+            var id = JSON.parse(localStorage.getItem('id'))
+            id--;
+            localStorage.setItem('id', JSON.stringify(id))
+
+            data.forEach((item, index) => {
+                item.id = index + 1;
+            });
+
+            localStorage.setItem('storeData', JSON.stringify(data))
+
+            showData();
+        }
+
+
+
+        var checktrue = document.getElementById('maincheck');
+        var checkboxes = document.querySelectorAll('#check');
+
+        checktrue.addEventListener('click', function () {
+            checkboxes.forEach(element => {
+                if (checktrue.checked == true) {
+                    element.checked = true
+                }
+                else {
+                    element.checked = false
+                }
+            })
+        })
+
+        document.getElementById('pdf').addEventListener('click', function () {
+
+            const ele = document.getElementById('saveas');
+            var th = document.querySelectorAll('th');
+            var thead = document.querySelector('#head')
+            var td = document.querySelectorAll('td');
+            var tr = document.querySelectorAll('#rows');
+            var check = document.querySelectorAll('#check');
+            var rowlenght = tr.length;
+            var maincheck = document.getElementById('maincheck');
+
+
+            let checkerror = 0;
+            let call = 0;
+
+            check.forEach(element => {
+                if (!element.checked) {
+                    checkerror++;
+                    errorCheck(checkerror);
+                }
+                else {
+                    checkdone();
+                }
+            })
+
+            function errorCheck(checkerror) {
+                if (checkerror == 1) {
+                    alert('please check all check box!!!!');
+                }
+            }
+
+            function checkdone() {
+
+                th.forEach(element => {
+                    element.style.color = 'black'
+                });
+
+                td.forEach(element => {
+                    element.style.color = 'black'
+                });
+
+                for (let i = 0; i < rowlenght; i++) {
+                    if (check.length > 0) {
+                        if (!check[i].checked) {
+                            tr[i].style.display = 'none';
+                        }
+                        call++;
+                        fulldis(call)
+                    }
+                }
+
+
+                function fulldis(call) {
+                    document.getElementById('saveas').style.width = '100%'
+                    document.getElementById('clear').style.display = 'none';
+                    document.querySelector('.pdfcolor').style.borderColor = 'black';
+                    document.getElementById('checkhead').style.display = 'none';
+
+                    var checknone = document.querySelectorAll('#check');
+                    checknone.forEach(element => {
+                        element.style.display = 'none'
+                    })
+
+                    var checknone = document.querySelectorAll('#remove');
+                    checknone.forEach(element => {
+                        element.style.display = 'none'
+                    })
+
+                    var checknone = document.querySelectorAll('#checkrow');
+                    checknone.forEach(element => {
+                        element.style.display = 'none'
+                    })
+
+                    document.getElementById('maincheck').style.display = 'none';
+
+                    if (call == 1) {
+                        html2pdf(ele);
+                        setTimeout(() => {
+                            location.reload()
+                        }, 1000);
+                    }
+                }
+            }
+
+
+            // html2pdf().set({
+            //     margin: 15,
+            //     filename: 'my_document.pdf',
+            //     image: {
+            //         type: 'jpeg',
+            //         quality: 0.98
+            //     },
+            //     html2canvas: { scale: 2 },
+            //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            // }).from(table).save();
+
+        })
+
+        function clearData() {
+            localStorage.clear()
+            showData();
+        }
+    </script>
+</body>
+
+</html>
